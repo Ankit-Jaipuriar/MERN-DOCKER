@@ -12,7 +12,7 @@ const Login = () => {
     e.preventDefault(); // Prevent the form from refreshing the page
     try {
       const response = await axios.post(
-        '/api/login', // This is your backend endpoint
+        'http://localhost:5050/api/login', // This is your backend endpoint
         { email, password },
         { withCredentials: true } // Ensures cookies are included
       );
