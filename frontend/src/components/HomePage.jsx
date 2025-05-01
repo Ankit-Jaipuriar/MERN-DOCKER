@@ -162,7 +162,7 @@ const HomePage = () => {
       <nav className="flex justify-between py-2 sm:py-4 items-center sm:px-6 px-4 relative">
       <div className="flex items-center space-x-2">
   <img src={secureIcon} alt="icon" className="h-6 w-6" />
-  <h3 className="text-xl sm:text-xl font-semibold tracking-tight">Secure-NoteBook-NEW</h3>
+  <h3 className="text-xl sm:text-xl font-semibold tracking-tight">Secure-NoteBook</h3>
 </div>
 
         <button
