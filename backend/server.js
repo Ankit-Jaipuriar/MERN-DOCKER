@@ -357,42 +357,42 @@ app.get('/api/shared-files', authenticate, async (req, res) => {
 });
 
 // Function to clean expired shared files
-const cleanExpiredSharedFiles = async () => {
-  try {
-    const users = await userModel.find(); // Get all users
+// const cleanExpiredSharedFiles = async () => {
+//   try {
+//     const users = await userModel.find(); // Get all users
 
-    for (let user of users) {
-      const currentTime = new Date();
+//     for (let user of users) {
+//       const currentTime = new Date();
       
-      // Create a new array by filtering out expired files
-      const updatedSharedFiles = user.sharedFiles.filter(sharedFile => {
-        // Ensure expiry is a Date object and compare it with current time
-        return new Date(sharedFile.expiry) > currentTime;
-      });
+//       // Create a new array by filtering out expired files
+//       const updatedSharedFiles = user.sharedFiles.filter(sharedFile => {
+//         // Ensure expiry is a Date object and compare it with current time
+//         return new Date(sharedFile.expiry) > currentTime;
+//       });
 
-      // Check if the sharedFiles array was modified (i.e., if files were expired and removed)
-      if (updatedSharedFiles.length !== user.sharedFiles.length) {
-        console.log(`User ${user.email}: Expired files removed.`); // Log the cleanup
+//       // Check if the sharedFiles array was modified (i.e., if files were expired and removed)
+//       if (updatedSharedFiles.length !== user.sharedFiles.length) {
+//         console.log(`User ${user.email}: Expired files removed.`); // Log the cleanup
         
-        // Replace the old sharedFiles with the updated one (without expired files)
-        user.sharedFiles = updatedSharedFiles;
+//         // Replace the old sharedFiles with the updated one (without expired files)
+//         user.sharedFiles = updatedSharedFiles;
 
-        // Mark the document as modified to ensure mongoose saves it
-        await user.save();
-      }
-    }
-  } catch (error) {
-    console.error("Error cleaning expired files:", error);
-  }
-};
+//         // Mark the document as modified to ensure mongoose saves it
+//         await user.save();
+//       }
+//     }
+//   } catch (error) {
+//     console.error("Error cleaning expired files:", error);
+//   }
+// };
 
-const interval = 100; 
-setInterval(() => {
-  cleanExpiredSharedFiles(); // Call cleanup function
-}, interval);
+// const interval = 100; 
+// setInterval(() => {
+//   cleanExpiredSharedFiles(); // Call cleanup function
+// }, interval);
 
 // Optionally, you can call cleanExpiredSharedFiles once immediately when the app starts.
-cleanExpiredSharedFiles();
+// cleanExpiredSharedFiles();
 
 app.get('/api/notes/:fileId', async (req, res) => {
   try {

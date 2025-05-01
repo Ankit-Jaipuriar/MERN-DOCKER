@@ -1,54 +1,42 @@
 pipeline {
     agent any
-
     environment {
         GIT_REPO = 'https://github.com/Ankit-Jaipuriar/MERN-Docker'
         BRANCH = 'master'
     }
-
     stages {
-
         stage('Clone') {
             steps {
                 git branch: "${BRANCH}", url: "${GIT_REPO}"
             }
         }
-
         stage('Build') {
             steps {
                 echo 'Build step started...'
-
-                // Install dependencies for the frontend
                 dir('frontend') {
                     bat 'npm install'
                 }
-
-                // Install dependencies for the backend
                 dir('backend') {
                     bat 'npm install'
                 }
-
                 echo 'Build step completed.'
             }
         }
-
         stage('Test') {
             steps {
                 echo 'Running test scripts...'
-                // Add your test commands here
                 echo 'Tests passed.'
             }
         }
-
-        stage('Deploy') {
+        stage('Docker Build & Deploy') {
             steps {
-                echo 'Deploying application...'
-                // You can add Docker build, Azure CLI, or SCP here
-                echo 'Deployment complete.'
+                echo 'Building and deploying Docker containers...'
+                bat 'docker-compose down'
+                bat 'docker-compose up --build -d'
+                echo 'Docker containers built and deployed.'
             }
         }
     }
-
     post {
         success {
             echo 'Pipeline completed successfully!'

@@ -162,7 +162,7 @@ const HomePage = () => {
       <nav className="flex justify-between py-2 sm:py-4 items-center sm:px-6 px-4 relative">
       <div className="flex items-center space-x-2">
   <img src={secureIcon} alt="icon" className="h-6 w-6" />
-  <h3 className="text-xl sm:text-xl font-semibold tracking-tight">Secure-NoteBook</h3>
+  <h3 className="text-xl sm:text-xl font-semibold tracking-tight">Secure-NoteBook-NEW</h3>
 </div>
 
         <button
@@ -222,18 +222,9 @@ const HomePage = () => {
         className="divide-y divide-gray-300 overflow-y-auto"
         style={{ maxHeight: "200px" }} // Adjust height to fit 3 rows
       >
-        {sharedFiles.map((file) => {
-          const remainingTime = (expiry) => {
-            const diff = new Date(expiry) - new Date();
-            if (diff <= 0) return "Expired";
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
 
-            if (hours > 0) return `${hours}h ${minutes}m remaining`;
-            if (minutes > 0) return `${minutes}m ${seconds}s remaining`;
-            return `${seconds}s remaining`;
-          };
+          
 
           return (
             <li
@@ -256,11 +247,11 @@ const HomePage = () => {
               {/* Expiry and Actions */}
               <div className="flex items-center space-x-4 flex-none">
                 {/* Remaining Time */}
-                {file.expiry && (
+                {/* {file.expiry && (
                   <span className="text-red-500 text-xs sm:text-sm">
                     {remainingTime(file.expiry)}
                   </span>
-                )}
+                )} */}
 
                 {/* View Button */}
                 <button
@@ -272,7 +263,6 @@ const HomePage = () => {
               </div>
             </li>
           );
-        })}
       </ul>
     </div>
   )}
